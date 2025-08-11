@@ -1,0 +1,78 @@
+** sch_path: /headless/Documents/1bit_adc/1bit_adc.sch
+.subckt 1bit_adc IN2 IN1 OUT CLK OUT_DIGITAL NOUT_DIGITAL RESET_B SET_B
+*.PININFO IN1:I IN2:I OUT:O OUT_DIGITAL:O SET_B:I RESET_B:I CLK:I NOUT_DIGITAL:O
+XM9 OUT_ANALOG net4 AFTER_RES AFTER_RES sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM6 net4 net2 AFTER_RES AFTER_RES sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM10 AFTER_RES net2 net2 AFTER_RES sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM3 AFTER_RES net1 net1 AFTER_RES sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM4 net5 OUT_ANALOG VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM12 net6 net5 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+Vdrain1 net4 net7 0
+.save i(vdrain1)
+Vdrain2 net2 net8 0
+.save i(vdrain2)
+VDD_i VDD AFTER_RES 0
+.save i(vdd_i)
+VOUT_i net6 OUT 0
+.save i(vout_i)
+x2 CLK OUT RESET_B SET_B VSS VSS VDD VDD OUT_DIGITAL NOUT_DIGITAL sky130_fd_sc_hd__dfbbp_1
+R1 net9 net10 50meg m=1
+XM2 net3 IN2 net7 net3 sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM1 VSS net1 net1 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM5 VSS net1 net3 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM7 OUT_ANALOG net1 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM8 net8 IN1 net3 net3 sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM11 net5 OUT_ANALOG VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM13 net6 net5 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+R2 AFTER_RES OUT_ANALOG 1meg m=1
+XC8 VSS net6 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 m=1
+C1 VSS AFTER_RES 10n m=1
+**** begin user architecture code
+
+
+.options gmin=1e-12
+.option savecurrents
+.option wnflag=1
+.param vdd=1.8
+.param clk=500n
+VVDD VDD 0 DC vdd
+VIN1 IN1 0 SIN(1 0.5 450k 5n)
+VIN2 IN2 0 SIN(1 0.5 200k 5n)
+VGND VSS 0 DC 0
+VCLK CLK 0 PULSE(0 {vdd} 0 {clk/8} {clk/8} {clk/2} {clk})
+VSET_B SET_B 0 DC vdd
+VRESET_B RESET_B 0 DC vdd
+.tran {clk/4} {clk*100}
+
+.control
+save all
+run
+remzerovec
+write 1bit_adc.raw all
+
+*tran {clk/10} {clk*10}
+*plot IN1 IN2
+*set appendwrite
+*echo AC
+*reset
+*save all
+*ac dec 50 5k 100k
+*display
+*write 1bit_adc.raw all
+echo AMONG US
+shell pwd
+.endc
+.end
+
+
+
+** opencircuitdesign pdks install
+.lib /foss/pdks/sky130A/libs.tech/combined/sky130.lib.spice tt
+.include /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /foss/pdks/sky130A/libs.tech/xschem/sky130_stdcells/
+.include /foss/pdks/sky130A/libs.tech/xschem/sky130_fd_pr/
+
+**** end user architecture code
+.ends
+.GLOBAL VSS
+.GLOBAL VDD

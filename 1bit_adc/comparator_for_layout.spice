@@ -1,0 +1,76 @@
+** sch_path: /headless/Documents/1bit_adc/comparator_for_layout.sch
+.subckt comparator_for_layout IN1 IN2 OUT
+*.PININFO IN1:I IN2:I OUT:O
+XM9 OUT_ANALOG net5 net2 net2 sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM6 net5 net3 net2 net2 sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM10 net2 net3 net3 net2 sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM3 net2 net1 net1 net2 sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM4 net6 OUT_ANALOG VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+XM12 net7 net6 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 m=1
+Vdrain1 net5 net8 0
+.save i(vdrain1)
+Vdrain2 net3 net9 0
+.save i(vdrain2)
+VDD_i VDD net2 0
+.save i(vdd_i)
+VOUT_i net7 OUT 0
+.save i(vout_i)
+XM2 net4 IN2 net8 net4 sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM1 VSS net1 net1 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM5 VSS net1 net4 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM7 OUT_ANALOG net1 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM8 net9 IN1 net4 net4 sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM11 net6 OUT_ANALOG VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+XM13 net7 net6 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 m=1
+R2 net2 OUT_ANALOG 1meg m=1
+XC8 VSS net7 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 m=1
+C1 VSS net2 10n m=1
+**** begin user architecture code
+
+** opencircuitdesign pdks install
+.lib /foss/pdks/sky130A/libs.tech/combined/sky130.lib.spice tt
+.include /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /foss/pdks/sky130A/libs.tech/xschem/sky130_stdcells/
+.include /foss/pdks/sky130A/libs.tech/xschem/sky130_fd_pr/
+
+
+
+.options gmin=1e-12
+.param vdd=1.8
+.param clk=500n
+VVDD VDD 0 DC vdd
+VIN1 IN1 0 SIN(1 0.5 450k 5n)
+VIN2 IN2 0 SIN(1 0.5 200k 5n)
+VGND VSS 0 DC 0
+.tran {clk/4} {clk*100}
+.control
+save all
+
+run
+tran {clk/10} {clk*10}
+
+remzerovec
+write comparator_for_layout.raw all
+*set appendwrite
+
+*echo AC
+*reset
+*save all
+*ac dec 50 5k 100k
+
+*display
+*write 1bit_adc.raw all
+
+
+
+echo AMONG US
+shell pwd
+
+.endc
+.end
+
+
+**** end user architecture code
+.ends
+.GLOBAL VSS
+.GLOBAL VDD
