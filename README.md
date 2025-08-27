@@ -11,7 +11,9 @@ The SAR ADC employs a hybrid architecture that seamlessly bridges analog and dig
 - **Cross-Domain Interface**: Uses a 1.8V and 3.3V for control logic and positive supply.
 <img width="1312" height="686" alt="image" src="./img/3bit_dac_sample_and_hold.png"/>
 <img width="1312" height="686" alt="image" src="./img/SAR_logic.png"/>
+
 ### Core Components
+
 #### Binary-Weighted Capacitive DAC
 - **Architecture**: 3-bit binary-weighted capacitor array using Sky130 MIM capacitors.
 - The DAC circuit is controlled by 3 select lines, where each controls the first, second and third bit respectively.
@@ -105,6 +107,7 @@ For example: an input of 0 0 0 gives us the lowest voltage from the DAC, while a
 endmodule
 ```
 </details>
+
 ## Technical Specifications
 
 | Parameter | Value | Notes |
@@ -128,3 +131,4 @@ If you use this image, you should be able to get exactly the same file paths as 
 2. Generate verilator object
 3. Generate the netlist
 4. Run the simulation
+
