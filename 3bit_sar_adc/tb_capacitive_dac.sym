@@ -1,0 +1,26 @@
+v {xschem version=3.4.7 file_version=1.2}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+}
+T {@symname} -94.5 -6 0 0 0.3 0.3 {}
+T {@name} 135 -62 0 0 0.2 0.2 {}
+P 4 5 130 -50 -130 -50 -130 50 130 50 130 -50 {}
+B 5 147.5 -42.5 152.5 -37.5 {name=DAC_OUT dir=out}
+L 4 130 -40 150 -40 {}
+T {DAC_OUT} 125 -44 0 1 0.2 0.2 {}
+B 5 -152.5 -42.5 -147.5 -37.5 {name=SAR_SEL_0 dir=in}
+L 4 -150 -40 -130 -40 {}
+T {SAR_SEL_0} -125 -44 0 0 0.2 0.2 {}
+B 5 -152.5 -22.5 -147.5 -17.5 {name=SAR_SEL_1 dir=in}
+L 4 -150 -20 -130 -20 {}
+T {SAR_SEL_1} -125 -24 0 0 0.2 0.2 {}
+B 5 -152.5 -2.5 -147.5 2.5 {name=SAR_SEL_2 dir=in}
+L 4 -150 0 -130 0 {}
+T {SAR_SEL_2} -125 -4 0 0 0.2 0.2 {}
+B 5 -152.5 17.5 -147.5 22.5 {name=VREF dir=in}
+L 4 -150 20 -130 20 {}
+T {VREF} -125 16 0 0 0.2 0.2 {}
+B 5 -152.5 37.5 -147.5 42.5 {name=VSS dir=in}
+L 4 -150 40 -130 40 {}
+T {VSS} -125 36 0 0 0.2 0.2 {}
