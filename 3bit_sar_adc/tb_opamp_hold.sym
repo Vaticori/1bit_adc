@@ -1,0 +1,32 @@
+v {xschem version=3.4.7 file_version=1.2}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+}
+T {@symname} -76.5 -6 0 0 0.3 0.3 {}
+T {@name} 135 -72 0 0 0.2 0.2 {}
+P 4 5 130 -60 -130 -60 -130 60 130 60 130 -60 {}
+B 5 -152.5 -52.5 -147.5 -47.5 {name=VDD_REF dir=in}
+L 4 -150 -50 -130 -50 {}
+T {VDD_REF} -125 -54 0 0 0.2 0.2 {}
+B 5 -152.5 -32.5 -147.5 -27.5 {name=DAC_OUT dir=in}
+L 4 -150 -30 -130 -30 {}
+T {DAC_OUT} -125 -34 0 0 0.2 0.2 {}
+B 5 -152.5 -12.5 -147.5 -7.5 {name=CLK_SH dir=in}
+L 4 -150 -10 -130 -10 {}
+T {CLK_SH} -125 -14 0 0 0.2 0.2 {}
+B 5 -152.5 7.5 -147.5 12.5 {name=V_in_minus dir=in}
+L 4 -150 10 -130 10 {}
+T {V_in_minus} -125 6 0 0 0.2 0.2 {}
+B 5 147.5 -52.5 152.5 -47.5 {name=V_opamp_out dir=out}
+L 4 130 -50 150 -50 {}
+T {V_opamp_out} 125 -54 0 1 0.2 0.2 {}
+B 5 147.5 -32.5 152.5 -27.5 {name=V_OP_HOLD dir=out}
+L 4 130 -30 150 -30 {}
+T {V_OP_HOLD} 125 -34 0 1 0.2 0.2 {}
+B 5 -152.5 27.5 -147.5 32.5 {name=VZREF dir=in}
+L 4 -150 30 -130 30 {}
+T {VZREF} -125 26 0 0 0.2 0.2 {}
+B 5 -152.5 47.5 -147.5 52.5 {name=VSS dir=in}
+L 4 -150 50 -130 50 {}
+T {VSS} -125 46 0 0 0.2 0.2 {}

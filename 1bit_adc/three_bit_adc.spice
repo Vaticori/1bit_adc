@@ -1,9 +1,0 @@
-** sch_path: /headless/Documents/1bit_adc/three_bit_adc.sch
-**.subckt three_bit_adc clk sel_wire[2],sel_wire[1],sel_wire[0] add reset done
-*.iopin clk
-*.iopin reset
-*.opin done
-*.iopin add
-*.iopin sel_wire[2],sel_wire[1],sel_wire[0]
-**.ends
-.end

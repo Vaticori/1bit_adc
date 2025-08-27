@@ -1,0 +1,203 @@
+** sch_path: /headless/Documents/3bit_sar_adc/tb_sar_adc.sch
+**.subckt tb_sar_adc SEL2,SEL1,SEL0 PRVS_SEL2,PRVS_SEL1,PRVS_SEL0 OUT ANALOG DAC_OUT_BUFFED ANALOG_OUT_BUFFED CLK_SH
+*.opin SEL2,SEL1,SEL0
+*.opin PRVS_SEL2,PRVS_SEL1,PRVS_SEL0
+*.opin OUT
+*.ipin ANALOG
+*.opin DAC_OUT_BUFFED
+*.opin ANALOG_OUT_BUFFED
+*.ipin CLK_SH
+VPULSE ADD 0 PULSE 0 {vcc} 0.2u 10n 10n 1.3u 5u
+VTEST RESET 0 PULSE 0 3.3 0 10n 10n 500n 16u
+xtestv net10 RESET OUT DONE SEL2 SEL1 SEL0 CLK PRVS_SEL2 PRVS_SEL1 PRVS_SEL0 sar_adc
+A2 [ DONE ] [ DONE_A ] dac_buff
+VCLOCK CLK 0 pulse 0 'VCC' 500n 10n 10n 500n 1u
+A1 [ SEL1 ] [ SEL1A ] dac_buff
+A3 [ SEL2 ] [ SEL2A ] dac_buff
+A4 [ SEL0 ] [ SEL0A ] dac_buff
+A5 [ PRVS_SEL2 ] [ PRVS_SEL2A ] dac_buff
+A6 [ PRVS_SEL1 ] [ PRVS_SEL1A ] dac_buff
+A7 [ PRVS_SEL0 ] [ PRVS_SEL0A ] dac_buff
+XM9 R_FEEDBACK net4 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM6 net4 net2 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM10 VDD net2 net2 VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM3 VDD net1 net1 VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM4 net5 R_FEEDBACK VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM12 OUT net5 VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM2 net3 ANALOG_OUT_BUFFED net4 net3 sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM1 VSS net1 net1 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM5 VSS net1 net3 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM7 R_FEEDBACK net1 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM8 net2 DAC_OUT_BUFFED net3 net3 sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=2 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM11 net5 R_FEEDBACK VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM13 OUT net5 VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29' pd='2*int((nf+1)/2) * (W/nf + 0.29)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XC8 VSS OUT sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=3 m=3
+VVCC1 VDD 0 'VCC'
+VPULSE1 ANALOG 0 SIN(1.2 1.2 100k 50n)
+x1v DAC_OUT SEL0A SEL1A SEL2A VDD VSS tb_capacitive_dac
+x2 VREF DAC_OUT VREF net7 net6 DAC_OUT_BUFFED VSS V- tb_opamp_hold
+VVREF VREF 0 3.3
+x3 VREF ANALOG DONE_A net8 net9 ANALOG_OUT_BUFFED VSS V- tb_opamp_hold
+VVCC3 VSS 0 0
+VVCC2 V- 0 -1.8
+* noconn DONE_A
+* noconn ADD
+* noconn PRVS_SEL2A
+* noconn PRVS_SEL1A
+* noconn PRVS_SEL0A
+VCLOCK1 CLK_SH 0 PULSE(0 3.3 0 0.1n 0.1n 0.6u 1.2u)
+* noconn #net10
+XC1 VSS DAC_OUT sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=50 m=50
+R14 net6 net7 1k m=1
+R3 net9 net8 10k m=1
+R4 OUT R_FEEDBACK 5Meg m=1
+**** begin user architecture code
+
+
+
+.param VCC=1.8
+.control
+.ac dec 10 1 1meg
+
+save all
+  tran 10n 150u
+  remzerovec
+  write tb_sar_adc.raw
+  fft v(dac_out)
+  *plot db(mag(v(dac_out)+1e-12)) xlimit 1k 1meg
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /foss/pdks/sky130A/libs.tech/combined/sky130.lib.spice tt
+.include /foss/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /foss/pdks/sky130A/libs.tech/xschem/sky130_stdcells/
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  /headless/Documents/3bit_sar_adc/sar_adc.sym # of pins=7
+** sym_path: /headless/Documents/3bit_sar_adc/sar_adc.sym
+** sch_path: /headless/Documents/3bit_sar_adc/sar_adc.sch
+.subckt sar_adc INPUT RESET START VALID SEL2 SEL1 SEL0 CLK prvs2 prvs1 prvs0
+*.ipin INPUT
+*.ipin RESET
+*.ipin START
+*.opin VALID
+*.ipin CLK
+*.opin SEL2,SEL1,SEL0
+*.opin prvs2,prvs1,prvs0
+ACOMP [ net2 ] [ net1 ] comparator
+ADUT net3 RESET CLK VALID SEL2 SEL1 SEL0 START prvs2 prvs1 prvs0 sar_adc
+A1 [ COMP ] [ COMP_A ] dac_buff
+* noconn #net1
+* noconn #net2
+* noconn COMP_A
+* noconn COMP
+* noconn INPUT
+* noconn #net3
+.ends
+
+
+* expanding   symbol:  /headless/Documents/3bit_sar_adc/tb_capacitive_dac.sym # of pins=6
+** sym_path: /headless/Documents/3bit_sar_adc/tb_capacitive_dac.sym
+** sch_path: /headless/Documents/3bit_sar_adc/tb_capacitive_dac.sch
+.subckt tb_capacitive_dac DAC_OUT SAR_SEL_0 SAR_SEL_1 SAR_SEL_2 VREF VSS
+*.opin DAC_OUT
+*.ipin SAR_SEL_1
+*.ipin SAR_SEL_0
+*.ipin SAR_SEL_2
+*.ipin VREF
+*.ipin VSS
+XM20 VSS SAR_SEL_2 S2 S2 sky130_fd_pr__pfet_01v8 L=0.15 W=100 nf=4 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM21 VREF SAR_SEL_2 S2 S2 sky130_fd_pr__nfet_01v8 L=0.15 W=150 nf=4 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XC16 net1 S1 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=400 m=400
+XC18 net1 S0 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=200 m=200
+XM22 VSS SAR_SEL_1 S1 S1 sky130_fd_pr__pfet_01v8 L=0.15 W=100 nf=10 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM23 VREF SAR_SEL_1 S1 S1 sky130_fd_pr__nfet_01v8 L=0.15 W=150 nf=4 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM24 VSS SAR_SEL_0 S0 S0 sky130_fd_pr__pfet_01v8 L=0.15 W=100 nf=4 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM25 VREF SAR_SEL_0 S0 S0 sky130_fd_pr__nfet_01v8 L=0.15 W=150 nf=4 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XC22 DAC_OUT VSS sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=20 m=20
+XC2 net1 S2 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=825 m=825
+XC6 VSS S2 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=200 m=200
+XC5 VSS S1 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=200 m=200
+XC7 VSS S0 sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=100 m=100
+**** begin user architecture code
+
+
+
+
+.param CAP=80
+
+
+
+**** end user architecture code
+R1 net1 DAC_OUT 10 m=1
+.ends
+
+
+* expanding   symbol:  /headless/Documents/3bit_sar_adc/tb_opamp_hold.sym # of pins=8
+** sym_path: /headless/Documents/3bit_sar_adc/tb_opamp_hold.sym
+** sch_path: /headless/Documents/3bit_sar_adc/tb_opamp_hold.sch
+.subckt tb_opamp_hold VDD_REF DAC_OUT CLK_SH V_in_minus V_opamp_out V_OP_HOLD VZREF VSS
+*.opin V_opamp_out
+*.ipin DAC_OUT
+*.ipin CLK_SH
+*.opin V_OP_HOLD
+*.ipin VDD_REF
+*.ipin VZREF
+*.ipin VSS
+*.ipin V_in_minus
+XM82 net1 V_in_minus net3 net3 sky130_fd_pr__pfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM84 net2 DAC_OUT net3 net3 sky130_fd_pr__pfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM85 net1 net1 VSS VSS sky130_fd_pr__nfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)' nrd='0.29 / W'
++ nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM86 net2 net1 VSS VSS sky130_fd_pr__nfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)' nrd='0.29 / W'
++ nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM87 net3 VSS VDD_REF VDD_REF sky130_fd_pr__pfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM88 V_opamp_out VSS VDD_REF VDD_REF sky130_fd_pr__pfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM89 VZREF VSS VDD_REF VDD_REF sky130_fd_pr__pfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM90 net4 VDD_REF net2 VSS sky130_fd_pr__nfet_01v8 L=0.6 W=1 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XM91 V_opamp_out net2 VSS VSS sky130_fd_pr__nfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XR10 VSS VZREF VSS sky130_fd_pr__res_high_po W=1 L=1 mult=1 m=1
+XR13 VZREF VDD_REF VSS sky130_fd_pr__res_high_po W=1 L=1 mult=1 m=1
+C34 V_opamp_out net4 0.8p m=1
+XM80 V_OP_HOLD CLK_SH V_opamp_out VZREF sky130_fd_pr__nfet_01v8 L=0.6 W=6 nf=1 ad='W * 0.29' as='W * 0.29' pd='2 * (W + 0.29)' ps='2 * (W + 0.29)'
++ nrd='0.29 / W' nrs='0.29 / W' sa=0 sb=0 sd=0 mult=1 m=1
+XC1 V_OP_HOLD VZREF sky130_fd_pr__cap_mim_m3_1 W=5 L=1 MF=42 m=42
+.ends
+
+**** begin user architecture code
+.model dac_buff dac_bridge input_load=1e-15 t_rise=10n t_fall=10n
++ out_low=0 out_high=3.3
+.model comparator adc_bridge in_low=0 in_high=3.3
+.model dut d_cosim simulation="./three_bit_adc.so"
+**** end user architecture code
+.end
